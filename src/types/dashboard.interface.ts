@@ -11,3 +11,8 @@ export interface IDashboardListItem {
 }
 
 export type INewToDo = Omit<IDashboardListItem, 'id'>
+
+export interface NewPost {
+  data: INewToDo
+  open: boolean
+}

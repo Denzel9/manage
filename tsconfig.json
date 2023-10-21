@@ -20,6 +20,12 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
+
+    "baseUrl": "src",
+    "paths": {
+      "test-utils": ["./utils/test-utils"]
+    },
+
   "include": [
     "src"
   ]

@@ -1,8 +1,11 @@
-import { FunctionComponent } from 'react'
+import { ReactNode } from 'react'
 import Dashboard from './dashboard/Dashboard'
+import React from 'react'
 
-const HomePage: FunctionComponent = () => {
-  return <Dashboard />
+class HomePage extends React.Component {
+  render(): ReactNode {
+    return <Dashboard />
+  }
 }
 
 export default HomePage

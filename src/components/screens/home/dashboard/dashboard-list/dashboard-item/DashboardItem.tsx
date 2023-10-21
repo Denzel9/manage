@@ -1,34 +1,42 @@
 import classNames from 'classnames'
-import { FunctionComponent, useState } from 'react'
+import React from 'react'
 import { IDashboardListItem } from '../../../../../../types/dashboard.interface'
 import { color } from '../../../../../../helpers/getColors'
 
-const DashboardItem: FunctionComponent<IDashboardListItem> = ({ title, date, desc, status }) => {
-  const [open, setOpen] = useState(false)
-
-  return (
-    <div
-      className={classNames(
-        open ? 'h-[150px]' : ' h-[60px]',
-        `relative w-full ${color(
-          status
-        )} rounded-lg p-2 mt-3 duration-500 text-white cursor-pointer`
-      )}
-      onClick={() => setOpen(!open)}
-    >
-      <h2 className=" truncate">{title}</h2>
-      <p
+class DashboardItem extends React.Component<IDashboardListItem, { open: boolean }> {
+  constructor(props: IDashboardListItem) {
+    super(props)
+    this.state = {
+      open: false,
+    }
+  }
+  render(): React.ReactNode {
+    return (
+      <div
         className={classNames(
-          open ? ' opacity-100' : ' opacity-0',
-          'text-xs my-3 delay-200 cursor-default'
+          this.state.open ? 'h-[150px]' : ' h-[60px]',
+          `relative w-full ${color(
+            this.props.status
+          )} rounded-lg p-2 mt-3 duration-500 text-white cursor-pointer`
         )}
+        onClick={() => this.setState({ open: !this.state.open })}
       >
-        {desc}
-      </p>
-      <span className=" pt-3 absolute bottom-2 left-2 text-xs cursor-default">{date}</span>
-      <span className=" pt-3 absolute bottom-2 right-2">{status}</span>
-    </div>
-  )
+        <h2 className=" truncate">{this.props.title}</h2>
+        <p
+          className={classNames(
+            this.state.open ? ' opacity-100' : ' opacity-0',
+            'text-xs my-3 delay-200 cursor-default'
+          )}
+        >
+          {this.props.desc}
+        </p>
+        <span className=" pt-3 absolute bottom-2 left-2 text-xs cursor-default">
+          {this.props.date}
+        </span>
+        <span className=" pt-3 absolute bottom-2 right-2">{this.props.status}</span>
+      </div>
+    )
+  }
 }
 
 export default DashboardItem

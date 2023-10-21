@@ -4,8 +4,6 @@ import { useSingleToDo } from '../../../hooks/useSingleToDo'
 import { MdClear } from 'react-icons/md'
 import { SideBarContex } from '../Layout'
 import { useDeleteToDo, useUpdateStatus } from '../../../hooks/useToDoData'
-import Select from '../../ui/add-post-btn/form/select/Select'
-import { INewToDo } from '../../../types/dashboard.interface'
 import { MdModeEdit } from 'react-icons/md'
 
 const SideBar: FunctionComponent<{ open: boolean; id: number }> = ({ open, id }) => {
@@ -47,7 +45,7 @@ const SideBar: FunctionComponent<{ open: boolean; id: number }> = ({ open, id })
       </p>
       {show ? (
         <>
-          <Select data={data as INewToDo} setData={setData} />
+          {/* <Select data={data as INewToDo} setData={setData} /> */}
           <button
             className=" bg-gray border rounded-lg px-4 py-2 mt-5 hover:scale-110 transition-transform"
             onClick={handleUpdate}

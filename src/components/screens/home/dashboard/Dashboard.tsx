@@ -1,25 +1,52 @@
-import { FunctionComponent, useContext } from 'react'
+import React, { Dispatch } from 'react'
 import DashboardList from './dashboard-list/DashboardList'
-import { useToDoData } from '../../../../hooks/useToDoData'
-import { SideBarContex } from '../../../layout/Layout'
 
-const Dashboard: FunctionComponent = () => {
-  const { todo } = useToDoData()
-  const { setOpenSide } = useContext(SideBarContex)
-  return (
-    <div className=" p-5 h-screen" onClick={() => setOpenSide(false)}>
-      {/* <div className="flex items-center gap-3">
-        <div className=" w-[50px] h-[50px] bg-pink rounded-full"></div>
-        <span>Hey User!</span>
-      </div> */}
-      <div className=" flex justify-between">
-        <DashboardList title={'Текущие задачи'} data={todo?.current!} />
-        <DashboardList title={'Будущие задачи'} data={todo?.future!} />
-        <DashboardList title={'Выполненные задачи'} data={todo?.completed!} />
-        <DashboardList title={'Архив'} data={todo?.archive!} />
+import { State, getToDo } from '../../../../redux/reducer'
+import { connect } from 'react-redux'
+
+class Dashboard extends React.Component<any, State> {
+  componentDidMount(): void {
+    this.props.getData()
+  }
+  render() {
+    return (
+      <div className=" p-5 h-screen" onClick={() => {}}>
+        <div className=" flex justify-between">
+          <DashboardList
+            title={'Текущие задачи'}
+            data={this.props.toDo.filter((item: any) => item.status === 'Выполнено')}
+          />
+          <DashboardList
+            title={'Будущие задачи'}
+            data={this.props.toDo.filter((item: any) => item.status === 'Текущая')}
+          />
+          <DashboardList
+            title={'Выполненные задачи'}
+            data={this.props.toDo.filter((item: any) => item.status === 'Будущая')}
+          />
+          <DashboardList
+            title={'Архив'}
+            data={this.props.toDo.filter((item: any) => item.status === 'В архиве')}
+          />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
-export default Dashboard
+function mapStateToProps(state: State) {
+  const { toDo, loading, error } = state
+  return {
+    toDo,
+    loading,
+    error,
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+  return {
+    getData: () => dispatch(getToDo()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
