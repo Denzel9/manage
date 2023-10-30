@@ -21,6 +21,7 @@ const MenuItemList: FunctionComponent<{ open: boolean; data: IMenuItem[] }> = ({
             className=" cursor-pointer hover:scale-110 hover:translate-x-3 transition-transform"
             key={item.id}
             onClick={() => handleClick(item.id)}
+            data-testid="title-menu-list"
           >
             {item.title}
           </p>

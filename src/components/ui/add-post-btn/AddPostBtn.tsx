@@ -6,7 +6,7 @@ import { currentDate } from '../../../helpers/getDate'
 import classNames from 'classnames'
 import { MdAdd } from 'react-icons/md'
 
-class AddPostBtn extends React.Component<{}, NewPost> {
+class AddPostBtn extends React.Component<{}, any> {
   constructor(props: {}) {
     super(props)
 
@@ -18,23 +18,27 @@ class AddPostBtn extends React.Component<{}, NewPost> {
         status: '',
         date: currentDate,
       },
+      add: 'add',
     }
 
     this.setState = this.setState.bind(this)
   }
 
-  // const { postToDo } = usePostToDo()
-
   handleClick = () => {
     this.state.open
-      ? // postToDo(data)
-        this.setState({ data: { title: '', desc: '', status: '', date: '' }, open: false })
+      ? this.setState({
+          data: { title: '', desc: '', status: '', date: '' },
+          open: false,
+          add: 'done',
+        })
       : this.setState({ ...this.state, open: true })
   }
   render(): React.ReactNode {
     return (
       <div className="relative flex items-center ">
+        <span>{this.state.add}</span>
         <div
+          data-testid="AddPostBtn"
           className={classNames(
             this.state.open
               ? 'w-[150px] h-[50px] text-pink ml-[150px] text-center pt-3'

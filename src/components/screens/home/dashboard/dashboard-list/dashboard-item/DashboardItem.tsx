@@ -3,7 +3,7 @@ import React from 'react'
 import { IDashboardListItem } from '../../../../../../types/dashboard.interface'
 import { color } from '../../../../../../helpers/getColors'
 
-class DashboardItem extends React.Component<IDashboardListItem, { open: boolean }> {
+class DashboardItem extends React.Component<any, { open: boolean }> {
   constructor(props: IDashboardListItem) {
     super(props)
     this.state = {
@@ -13,6 +13,7 @@ class DashboardItem extends React.Component<IDashboardListItem, { open: boolean 
   render(): React.ReactNode {
     return (
       <div
+        data-testid="openDesc"
         className={classNames(
           this.state.open ? 'h-[150px]' : ' h-[60px]',
           `relative w-full ${color(

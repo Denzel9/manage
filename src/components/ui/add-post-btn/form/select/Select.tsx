@@ -14,7 +14,7 @@ class Select extends React.Component<
   }
   render(): React.ReactNode {
     return (
-      <ul className="  text-white mt-5">
+      <ul className=" text-white mt-5">
         <li
           className=" relative flex items-center cursor-pointer"
           onClick={() => this.setState({ show: !this.state.show })}
@@ -27,10 +27,12 @@ class Select extends React.Component<
           )}
         </li>
         <div
+          data-testid="openStatus"
           className={this.state.show ? ' block' : ' hidden'}
           onClick={() => this.setState({ show: false })}
         >
           <li
+            data-testid="current"
             className=" cursor-pointer"
             onClick={() =>
               this.props.setData({

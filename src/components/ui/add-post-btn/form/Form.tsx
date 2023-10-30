@@ -2,16 +2,9 @@ import classNames from 'classnames'
 import React from 'react'
 import { MdClear } from 'react-icons/md'
 import Select from './select/Select'
-import { NewPost } from '../../../../types/dashboard.interface'
 
-interface IForm {
-  setState(data: NewPost): void
-  data: NewPost
-}
-
-class Form extends React.Component<IForm> {
+class Form extends React.Component<any> {
   render(): React.ReactNode {
-    console.log(this.props.data)
     return (
       <form
         className={classNames(
@@ -32,6 +25,7 @@ class Form extends React.Component<IForm> {
           </button>
         </div>
         <input
+          data-testid="postTitle"
           className=" mt-5 bg-transparent border-b border-white w-full py-2 outline-none text-white"
           type="text"
           placeholder="Заголовок"
@@ -47,6 +41,7 @@ class Form extends React.Component<IForm> {
           }
         />
         <input
+          data-testid="postDesc"
           className=" bg-transparent border-b border-white w-full py-2 outline-none text-white"
           type="text"
           placeholder="Описание"
